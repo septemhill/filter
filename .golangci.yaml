@@ -1,0 +1,44 @@
+run:
+  # Include test files or not.
+  # Default: true
+  tests: false
+linters:
+  # Disable all linters.
+  # Default: false
+  disable-all: true
+  # Enable specific linter
+  # https://golangci-lint.run/usage/linters/#enabled-by-default
+  enable:
+    - asasalint
+    - asciicheck
+    - bidichk
+    - bodyclose
+    - containedctx
+    - contextcheck
+    - decorder
+    - durationcheck
+    - errcheck
+    - errorlint
+    - execinquery
+    - exhaustive
+    - gocheckcompilerdirectives
+    - goconst
+    - gocritic
+    # - gofumpt
+    - goimports
+    - gosec
+    - gosimple
+    # - ireturn
+    - mirror
+    - nilerr
+    - noctx
+    - prealloc
+    - reassign
+    - sloglint
+    - sqlclosecheck
+    - tagalign
+    # - testifylint # keep this disable, unless we decided to run linter check for test cases.
+    - tparallel
+    - unused
+    - wastedassign
+    # - wsl
