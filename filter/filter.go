@@ -2,18 +2,11 @@ package filter
 
 import "sort"
 
-type Filter[Slice ~[]T, T any] interface {
-	Where(func(v T) bool) Filter[Slice, T]
-	Sort(func(a, b T) bool) Filter[Slice, T]
-	Take(int) Filter[Slice, T]
-	Result() Slice
-}
-
-type filterImpl[Slice ~[]T, T any] struct {
+type Filter[Slice ~[]T, T any] struct {
 	slice Slice
 }
 
-func (l *filterImpl[Slice, T]) Where(fn func(v T) bool) Filter[Slice, T] {
+func (l *Filter[Slice, T]) Where(fn func(v T) bool) *Filter[Slice, T] {
 	result := make([]T, 0)
 
 	for _, e := range l.slice {
@@ -22,12 +15,12 @@ func (l *filterImpl[Slice, T]) Where(fn func(v T) bool) Filter[Slice, T] {
 		}
 	}
 
-	return &filterImpl[Slice, T]{
+	return &Filter[Slice, T]{
 		slice: result,
 	}
 }
 
-func (l *filterImpl[Slice, T]) Take(num int) Filter[Slice, T] {
+func (l *Filter[Slice, T]) Take(num int) *Filter[Slice, T] {
 	min := func(a, b int) int {
 		if a > b {
 			return b
@@ -37,12 +30,12 @@ func (l *filterImpl[Slice, T]) Take(num int) Filter[Slice, T] {
 
 	n := min(num, len(l.slice))
 
-	return &filterImpl[Slice, T]{
+	return &Filter[Slice, T]{
 		slice: l.slice[:n],
 	}
 }
 
-func (l *filterImpl[Slice, T]) Sort(fn func(a, b T) bool) Filter[Slice, T] {
+func (l *Filter[Slice, T]) Sort(fn func(a, b T) bool) *Filter[Slice, T] {
 	n := make([]T, len(l.slice))
 	copy(n, l.slice)
 
@@ -50,17 +43,17 @@ func (l *filterImpl[Slice, T]) Sort(fn func(a, b T) bool) Filter[Slice, T] {
 		return fn(n[i], n[j])
 	})
 
-	return &filterImpl[Slice, T]{
+	return &Filter[Slice, T]{
 		slice: n,
 	}
 }
 
-func (l *filterImpl[Slice, T]) Result() Slice {
+func (l *Filter[Slice, T]) Result() Slice {
 	return l.slice
 }
 
-func From[Slice ~[]T, T any](slice Slice) Filter[Slice, T] {
-	return &filterImpl[Slice, T]{
+func From[Slice ~[]T, T any](slice Slice) *Filter[Slice, T] {
+	return &Filter[Slice, T]{
 		slice: slice,
 	}
 }
