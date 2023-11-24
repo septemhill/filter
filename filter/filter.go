@@ -5,6 +5,7 @@ import "sort"
 type Filter[Slice ~[]T, T any] interface {
 	Where(func(v T) bool) Filter[Slice, T]
 	Sort(func(a, b T) bool) Filter[Slice, T]
+	Take(int) Filter[Slice, T]
 	Result() Slice
 }
 
@@ -23,6 +24,21 @@ func (l *filterImpl[Slice, T]) Where(fn func(v T) bool) Filter[Slice, T] {
 
 	return &filterImpl[Slice, T]{
 		slice: result,
+	}
+}
+
+func (l *filterImpl[Slice, T]) Take(num int) Filter[Slice, T] {
+	min := func(a, b int) int {
+		if a > b {
+			return b
+		}
+		return a
+	}
+
+	n := min(num, len(l.slice))
+
+	return &filterImpl[Slice, T]{
+		slice: l.slice[:n],
 	}
 }
 

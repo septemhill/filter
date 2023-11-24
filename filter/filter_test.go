@@ -46,6 +46,57 @@ func TestFilterWhere(t *testing.T) {
 	})
 }
 
+func TestFilterTake(t *testing.T) {
+	t.Run("integer-slice-after-take", func(t *testing.T) {
+		args := []int{1, 3, 5, 7, 9}
+		want := []int{1, 3, 5}
+
+		got := From(args).
+			Take(3).
+			Result()
+
+		assert.Equal(t, want, got)
+	})
+
+	t.Run("integer-slice-after-take-over-num", func(t *testing.T) {
+		args := []int{1, 3, 5, 7, 9}
+		want := []int{1, 3, 5, 7, 9}
+
+		got := From(args).
+			Take(100).
+			Result()
+
+		assert.Equal(t, want, got)
+	})
+
+	t.Run("struct-slice", func(t *testing.T) {
+		type Base struct {
+			Age  int
+			Name string
+		}
+
+		args := []Base{
+			{Age: 32, Name: "David"},
+			{Age: 26, Name: "Lcuy"},
+			{Age: 63, Name: "Kiwi"},
+			{Age: 78, Name: "Rebecca"},
+			{Age: 56, Name: "Falcon"},
+		}
+
+		want := []Base{
+			{Age: 32, Name: "David"},
+			{Age: 26, Name: "Lcuy"},
+		}
+
+		got := From(args).
+			Take(2).
+			Result()
+
+		assert.Equal(t, want, got)
+	})
+
+}
+
 func TestFilterOrderBy(t *testing.T) {
 	t.Run("integer-slice", func(t *testing.T) {
 		args := []int{1, 3, 5, 7, 9}

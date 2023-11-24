@@ -3,6 +3,8 @@ go 1.21.3
 use (
 	./br
 	./enum
+	./filter
+	./future
 	./iter
 	./ops
 	./retry
