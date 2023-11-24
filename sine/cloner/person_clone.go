@@ -1,6 +1,6 @@
 package cloner
 
-import "github.com/septemhill/misc/sine/gene"
+import "sine/gene"
 
 func PersonClone(g gene.PersonGene) gene.PersonGene {
 	ng := g.Clone()

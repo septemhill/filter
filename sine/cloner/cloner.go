@@ -1,8 +1,8 @@
 package cloner
 
 import (
-	"github.com/septemhill/misc/sine/gene"
-	"github.com/septemhill/misc/sine/mut"
+	"sine/gene"
+	"sine/mut"
 )
 
 type Cloner[T gene.Gene[T]] interface {

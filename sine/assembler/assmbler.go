@@ -1,8 +1,8 @@
 package assembler
 
 import (
-	"github.com/septemhill/misc/sine/gene"
-	"github.com/septemhill/misc/sine/mut"
+	"sine/gene"
+	"sine/mut"
 )
 
 type Assembler[T gene.Gene[T]] interface {

@@ -1,6 +1,6 @@
 package assembler
 
-import "github.com/septemhill/misc/sine/gene"
+import "sine/gene"
 
 func PersonAssemble(g1, g2 *gene.PersonGene) *gene.PersonGene {
 	b := make([]byte, len(g1.Color))

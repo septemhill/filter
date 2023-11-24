@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/septemhill/enum"
-	"github.com/septemhill/misc/br"
+	"br"
+	"enum"
 )
 
 func main() {

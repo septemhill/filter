@@ -1,6 +1,6 @@
 package ops
 
-import "github.com/septemhill/misc/iter"
+import "iter"
 
 type iterOpsImpl[T any] struct {
 	next func() (T, bool)

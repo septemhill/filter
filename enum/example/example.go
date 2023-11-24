@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/septemhill/misc/enum"
+	"enum"
 )
 
 type Color enum.SumType

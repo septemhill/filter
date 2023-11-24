@@ -1,0 +1,11 @@
+go 1.21.3
+
+use (
+	./br
+	./enum
+	./iter
+	./ops
+	./retry
+	./sine
+	./task
+)

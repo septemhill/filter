@@ -1,7 +1,7 @@
 package br
 
 import (
-	"github.com/septemhill/enum"
+	"enum"
 )
 
 type IfFunc[T enum.SumType, U any] func(T) U

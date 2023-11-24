@@ -1,6 +1,6 @@
 package ops
 
-import "github.com/septemhill/misc/iter"
+import "iter"
 
 type SliceOps[Slice ~[]T, T any] interface {
 	Filter(func(v T) bool) SliceOps[Slice, T]
